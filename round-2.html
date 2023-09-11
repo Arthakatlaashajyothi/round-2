@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game</title>
+</head>
+<body>
+  <center>
+  <h1>START THE GAME</h1>
+  <h3>select your option below</h3>
+  <img src="images-prog/12.jpeg" height="150px" width="150px">
+  <img src="images-prog/13.jpeg" height="150px" width="150px">
+  <img src="images-prog/14.jpeg" height="150px" width="150px">
+</center>
+  <div style="padding-top:20px;">
+  <button id="rock" style="height:50px; width: 100px; margin-left:420px;">Rock</button>
+  <button id="scissors" style="height:50px; width: 100px; margin-left: 60px;">Scissors</button>
+  <button id="paper" style="height:50px; width: 100px; margin-left: 50px;">Paper</button></div><br><br><br>
+  <center>
+  <div id="result"></div>
+
+
+  <script>
+
+    const buttons = document.querySelectorAll('button');
+    const resultDiv = document.getElementById('result');
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', playGame);
+    });
+
+
+    function playGame(event) {
+      const playerChoice = event.target.id;
+      const computerChoice = getComputerChoice();
+      const winner = determineWinner(playerChoice, computerChoice);
+
+      displayResult(playerChoice, computerChoice, winner);
+    }
+
+    function getComputerChoice() {
+      const choices = ['rock', 'paper', 'scissors'];
+      const randomIndex = Math.floor(Math.random() * choices.length);
+      return choices[randomIndex];
+    }
+
+    function determineWinner(playerChoice, computerChoice) {
+      if (playerChoice === computerChoice) {
+        return 'It\'s a tie!';
+      } else if (
+        (playerChoice === 'rock' && computerChoice === 'scissors') ||
+        (playerChoice === 'rock' && computerChoice === 'paper') ||
+        (playerChoice === 'scissors' && computerChoice === 'paper')
+      ) {
+        return 'You win!';
+      } else {
+        return 'Computer wins!';
+      }
+    }
+  
+
+    function displayResult(playerChoice, computerChoice, winner) {
+      resultDiv.textContent = `You chose ${playerChoice}, Computer chose ${computerChoice}. ${winner}`;
+    }
+
+  </script>
+</center>
+</body>
+</html>
